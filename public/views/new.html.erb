@@ -1,0 +1,143 @@
+<html>
+  <head>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <style>
+      .color {
+        width: 40px;
+        height: 40px;
+        border: 1px solid black;
+        display: inline-block;
+      }
+      .yellow {
+        background: rgb(255, 255, 0);
+      }
+
+      .orange {
+        background: rgb(255, 153, 51);
+      }
+
+      .salmon {
+        background: rgb(255, 153, 153)
+      }
+
+      .red {
+        background: rgb(255, 51, 51);
+      }
+
+      .lightgreen {
+        background: rgb(153, 255, 51);
+      }
+
+      .green {
+        background: rgb(0, 153, 76);
+      }
+
+      .lightblue {
+        background: rgb(51, 255, 255);
+      }
+
+      .blue {
+        background: rgb(51, 152, 255);
+      }
+      .violet{
+        background: rgb(153, 51, 255);
+      }
+      .white {
+        background: rgb(255, 255, 255);
+      }
+      .black {
+        background: rgb(0,0,0);
+      }
+
+      table {
+        border-collapse: collapse;
+      }
+
+      .cell {
+        border: 1px solid black;
+        width: 40px;
+        height: 40px;
+        margin: 0;
+        padding: 0;
+      }
+    </style>
+    <script>
+        function getColor(element) {
+          colorsArray = $(element).data('target');
+        }
+
+        function updateCell(element) {
+          this.applyData(element);
+          this.applyColor(element);
+        }
+
+        function applyColor(element) {
+          $(element).css("background-color", makeColor(colorsArray));
+        }
+
+        function makeColor(array) {
+          return 'rgb(' + array.join(', ') + ')';
+        }
+
+        function sendRequest(data) {
+          $.ajax({
+            method: 'post',
+            url: '/new',
+            data: { data: JSON.stringify(data) },
+            success: onRequestSuccess,
+            error: function(data) {
+              console.log(data);
+            }
+          });
+        }
+
+        function onRequestSuccess(data) {
+          console.log(data)
+        }
+
+        function applyData(element) {
+          element.dataset.target = colorsArray;
+        }
+
+        function exportData () {
+          matrixArray = [];
+          $('tr').each( function () {
+            var rowArray = [];
+            $(this).children().each( function () {
+              rowArray.push($(this).data('target').split(',').map(e => Number(e)));
+            });
+            matrixArray.push(rowArray);
+          });
+          this.sendRequest(matrixArray);
+        }
+
+    </script>
+  </head>
+  <body>
+    <div class='table matrix-table'>
+      <table>
+        <% 15.times do |i| %>
+          <tr y='<%= i %>'>
+            <% 21.times do |j| %>
+              <td x='<%= j %>' class='cell' onclick="updateCell(this)" data-target="0,0,0"></td>
+            <% end %>
+          </tr>
+        <% end %>
+      </table>
+    </div><br>
+    <div class='color-picker'>
+      <div class='color yellow' onClick="getColor(this)" data-target="[255, 255, 0]"></div>
+      <div class='color orange' onClick="getColor(this)" data-target="[255, 153, 51]"></div>
+      <div class='color salmon' onClick="getColor(this)" data-target="[255, 153, 153]"></div>
+      <div class='color red' onClick="getColor(this)" data-target='[255, 51, 51]'></div>
+      <div class='color lightgreen' onClick="getColor(this)" data-target='[153, 255, 51]'></div>
+      <div class='color green' onClick="getColor(this)" data-target='[0, 153, 76]'></div>
+      <div class='color lightblue' onClick="getColor(this)" data-target='[51, 255, 255]'></div>
+      <div class='color blue' onClick="getColor(this)" data-target='[51, 152, 255]'></div>
+      <div class='color violet' onClick="getColor(this)" data-target='[153, 51, 255]'></div>
+      <div class='color white' onClick="getColor(this)" data-target='[255, 255, 255]'></div>
+      <div class='color black' onClick="getColor(this)" data-target='[0, 0, 0]'></div>
+    </div><br>
+    <button class='export-data' onclick="exportData()">Save</button>
+  </body>
+</html>

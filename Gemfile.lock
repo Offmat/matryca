@@ -1,6 +1,14 @@
+GIT
+  remote: git@github.com:codesthq/led_matrix.git
+  revision: a71d960b2cc7d43f73bfc66019c51c9fdd372341
+  specs:
+    led_matrix (0.1.0)
+
 GEM
+  remote: https://rubygems.org/
   specs:
     coderay (1.1.2)
+    json (2.1.0)
     method_source (0.9.2)
     mustermann (1.0.1)
     pry (0.12.2)
@@ -20,8 +28,10 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  json
+  led_matrix!
   pry
   sinatra
 
 BUNDLED WITH
-   1.16.1
+   1.17.1

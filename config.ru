@@ -1,4 +1,4 @@
 Bundler.require
 
-require './my_app'
+require './public/my_app'
 run MyApp
