@@ -95,32 +95,47 @@
           return 'rgb(' + array.join(', ') + ')';
         }
 
-        function exportData () {
-          matrixArray = [];
+        function readData () {
+          var matrixArray = [];
           $('tr').each( function () {
             var rowArray = [];
             $(this).children().each( function () {
-              rowArray.push($(this).data('target').split(',').map(e => Number(e)));
+              rowArray.push($(this).attr('data-target').split(',').map(e => Number(e)));
             });
+            $(this).data('target')
             matrixArray.push(rowArray);
           });
-          this.sendRequest(matrixArray);
+          return matrixArray;
         }
 
-        function sendRequest(data) {
+        function readName () {
+          return $('#name').val()
+        }
+
+        function sendRequest(data, path) {
           $.ajax({
             method: 'post',
-            url: '/new',
-            data: { data: JSON.stringify(data) },
-            success: onRequestSuccess,
+            url: path,
+            data: { data: JSON.stringify(data), name: readName() },
+            success: function(data) {
+              console.log(data);
+            },
             error: function(data) {
               console.log(data);
             }
           });
         }
 
-        function onRequestSuccess(data) {
-          console.log(data)
+        function saveData () {
+          var data = readData();
+          var path = '/new';
+          sendRequest(data, path);
+        }
+
+        function showData () {
+          var data = readData();
+          var path = '/show';
+          sendRequest(data, path);
         }
 
     </script>
@@ -137,6 +152,8 @@
         <% end %>
       </table>
     </div><br>
+    <input id='name'>
+    <br><br>
     <div class='color-picker'>
       <div class='color yellow' onClick="getColor(this)" data-target="[255, 255, 0]"></div>
       <div class='color orange' onClick="getColor(this)" data-target="[255, 153, 51]"></div>
@@ -153,6 +170,7 @@
       <div class='color grey' onClick="getColor(this)" data-target='[105, 105, 105]'></div>
       <div class='color black' onClick="getColor(this)" data-target='[0, 0, 0]'></div>
     </div><br>
-    <button class='export-data' onclick="exportData()">Save</button>
+    <button class='export-data' onclick="saveData()">Save</button>
+    <button class='export-data' onclick="showData()">Show</button>
   </body>
 </html>
