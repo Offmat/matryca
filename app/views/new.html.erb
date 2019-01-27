@@ -1,14 +1,14 @@
 <html>
   <head>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-    <script src="iro.min.js"></script>
-    <link rel="stylesheet" href="show.css" type="text/css" />
-    <script src="frame_form.js" type="text/javascript"></script>
+    <script src="/iro.min.js"></script>
+    <link rel="stylesheet" href="/show.css" type="text/css" />
+    <script src="/edit_frame.js" type="text/javascript"></script>
+    <script src="/frame_form.js" type="text/javascript"></script>
   </head>
   <body>
-
-    <div class='table matrix-table'>
-      <table style='display: -webkit-inline-box'>
+    <div class='table'>
+      <table class='matrix-table' style='display: -webkit-inline-box'>
         <% 15.times do |i| %>
           <tr y='<%= i %>'>
             <% 21.times do |j| %>
@@ -25,3 +25,8 @@
     <button class='export-data' onclick="showData()">Show</button>
   </body>
 </html>
+<% if @frame %>
+  <script>
+    new EditFrame(<%= @frame %>).call()
+  </script>
+<% end %>
