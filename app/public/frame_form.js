@@ -49,7 +49,7 @@ function sendRequest (data, path) {
   $.ajax({
     method: 'post',
     url: path,
-    data: { data: JSON.stringify(data), name: readName() },
+    data: { data: JSON.stringify(data), name: readName(), method: 'PATCH' },
     error: function(data) {
       console.log(data);
     }

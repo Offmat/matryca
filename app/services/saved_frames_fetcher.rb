@@ -14,29 +14,25 @@ class SavedFramesFetcher
   private
 
   def frames
-    Dir.glob('data/*.json') do |file|
-      saved_frames << create_set_from(file)
+    Dir.glob('data/*.jpg') do |img|
+      saved_frames << create_set_from(img)
     end
     saved_frames.sort_by { |hash| hash[:frame_id] }.reverse
   end
 
-  def create_set_from(file)
+  def create_set_from(img)
     {
-      frame_id: picture_id_from(file),
-      name: picture_name_from(file),
-      content: picture_data_from(file)
+      frame_id: picture_id_from(img),
+      name: picture_name_from(img),
+      img: img
     }
   end
 
-  def picture_id_from(file)
-    file.split('/')[1].split('_')[0]
+  def picture_id_from(img)
+    img.split('/')[1].split('_')[0]
   end
 
-  def picture_name_from(file)
-    file.split('_').drop(1).join('_')
-  end
-
-  def picture_data_from(file)
-    YAML.safe_load(File.read(file))
+  def picture_name_from(img)
+    img.split('_').drop(1).join('_')
   end
 end
