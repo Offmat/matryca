@@ -14,9 +14,11 @@ class MatrixSaveService
 
   def save
     Dir.mkdir(DIRECTORY) unless File.exist?(DIRECTORY)
-    File.open("#{DIRECTORY}/#{file_name}.json", 'wb') do |f|
-      f.write @frame_array
-    end
+    FrameToImageConverter.new(@frame_array, path).call
+  end
+
+  def path
+    DIRECTORY + '/' + file_name + '.jpg'
   end
 
   def file_name
