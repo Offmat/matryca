@@ -4,6 +4,7 @@
     <script src="/iro.min.js"></script>
     <link rel="stylesheet" href="/show.css" type="text/css" />
     <script src="/edit_frame.js" type="text/javascript"></script>
+    <script src="/upload_image.js" type="text/javascript"></script>
     <script src="/frame_form.js" type="text/javascript"></script>
   </head>
   <body>
@@ -23,10 +24,12 @@
     <br><br>
     <button class='export-data' onclick="saveData()">Save</button>
     <button class='export-data' onclick="showData()">Show</button>
+    <input type='file' name='image' accept='image/*'>
   </body>
 </html>
-<% if @frame %>
-  <script>
+<script>
+  new UploadImage().call()
+  <% if @frame %>
     new EditFrame(<%= @frame %>).call()
-  </script>
-<% end %>
+  <% end %>
+</script>
