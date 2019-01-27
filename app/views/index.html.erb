@@ -1,4 +1,4 @@
-<% [1,2,3].each do |i| %>
-  <%= i %>
+<% @saved_pictures.each do |frame| %>
+  <a href="/new/<%= frame[:frame_id] %>"><%= frame[:frame_id] %></a>
   <br>
 <% end %>
