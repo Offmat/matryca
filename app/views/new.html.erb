@@ -13,23 +13,24 @@
         <% 15.times do |i| %>
           <tr y='<%= i %>'>
             <% 21.times do |j| %>
-              <td x='<%= j %>' class='cell' onclick="updateCell(this)" data-target="0,0,0"></td>
+              <td x='<%= j %>' class='cell' data-target="0,0,0"></td>
             <% end %>
           </tr>
         <% end %>
       </table>
-      <span id="color-picker-container" onClick="getColor()"></span>
+      <span id="color-picker-container"></span>
     </div><br>
     <input id='name'>
     <br><br>
-    <button class='export-data' onclick="saveData()">Save</button>
-    <button class='export-data' onclick="showData()">Show</button>
+    <button class='export-data' id='save-data'>Save</button>
+    <button class='export-data' id='show-data'>Show</button>
     <input type='file' name='image' accept='image/*'>
   </body>
 </html>
 <script>
-  new UploadImage().call()
+  new FrameForm().run();
+  new UploadImage().call();
   <% if @frame %>
-    new EditFrame(<%= @frame %>).call()
+    new EditFrame(<%= @frame %>).call();
   <% end %>
 </script>

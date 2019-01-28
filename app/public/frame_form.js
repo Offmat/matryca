@@ -1,69 +1,101 @@
-var demoColorPicker = new iro.ColorPicker("#color-picker-container", {
-  width: 320,
-  height: 320,
-  color: "#f00",
-  display: 'inline'
-});
+/* exported FrameForm */
+class FrameForm {
+  constructor () {
+    this.colorsArray = [255, 0, 0];
+  }
 
-colorsArray = [255, 0, 0]
+  run () {
+    this._initializeColorPicker();
+    this._initializeGetColorEvent();
+    this._initializeSaveDataEvent();
+    this._initializeShowDataEvent();
+    this._initializeUpdateCellEvent();
+  }
 
-function getColor () {
-  colorsArray = Object.values(demoColorPicker.color.rgb)
-}
-
-function updateCell (element) {
-  this.applyData(element);
-  this.applyColor(element);
-}
-
-function applyData (element) {
-  element.dataset.target = colorsArray;
-}
-
-function applyColor (element) {
-  $(element).css("background-color", makeColor(colorsArray));
-}
-
-function makeColor (array) {
-  return 'rgb(' + array.join(', ') + ')';
-}
-
-function readData () {
-  var matrixArray = [];
-  $('tr').each( function () {
-    var rowArray = [];
-    $(this).children().each( function () {
-      rowArray.push($(this).attr('data-target').split(',').map(e => Number(e)));
+  _initializeColorPicker () {
+    this.demoColorPicker = new iro.ColorPicker("#color-picker-container", {
+      width: 320,
+      height: 320,
+      color: "#f00",
+      display: 'inline'
     });
-    $(this).data('target')
-    matrixArray.push(rowArray);
-  });
-  return matrixArray;
-}
+  }
 
-function readName () {
-  return $('#name').val()
-}
+  _initializeGetColorEvent () {
+    $('#color-picker-container').on('click', this._getColor.bind(this));
+  }
 
-function sendRequest (data, path) {
-  $.ajax({
-    method: 'post',
-    url: path,
-    data: { data: JSON.stringify(data), name: readName(), method: 'PATCH' },
-    error: function(data) {
-      console.log(data);
-    }
-  });
-}
+  _initializeSaveDataEvent () {
+    $('#save-data').on('click', this._saveData.bind(this));
+  }
 
-function saveData () {
-  var data = readData();
-  var path = '/new';
-  sendRequest(data, path);
-}
+  _initializeShowDataEvent () {
+    $('#show-data').on('click', this._showData.bind(this));
+  }
 
-function showData () {
-  var data = readData();
-  var path = '/show';
-  sendRequest(data, path);
+  _initializeUpdateCellEvent () {
+    $('.cell').on('click', e => {
+      this._updateCell(e);
+    });
+  }
+
+  _getColor () {
+    this.colorsArray = Object.values(this.demoColorPicker.color.rgb)
+  }
+
+  _updateCell (element) {
+    this._applyData(element);
+    this._applyColor(element);
+  }
+
+  _saveData () {
+    var path = '/new';
+    this._sendRequest(this._readData(), path);
+  }
+
+  _showData () {
+    var data = this._readData();
+    var path = '/show';
+    this._sendRequest(data, path);
+  }
+
+  _applyData (element) {
+    element.target.dataset.target = this.colorsArray;
+  }
+
+  _applyColor (element) {
+    $(element.target).css("background-color", this._makeColor(this.colorsArray));
+  }
+
+  _makeColor (array) {
+    return 'rgb(' + array.join(', ') + ')';
+  }
+
+  _readData () {
+    var matrixArray = [];
+    $('tr').each( function () {
+      var rowArray = [];
+      $(this).children().each( function () {
+        rowArray.push($(this).attr('data-target').split(',').map(e => Number(e)));
+      });
+      $(this).data('target')
+      matrixArray.push(rowArray);
+    });
+    return matrixArray;
+  }
+
+  _sendRequest (data, path) {
+    $.ajax({
+      method: 'post',
+      url: path,
+      data: { data: JSON.stringify(data), name: this._readName(), method: 'PATCH' },
+      error: function(data) {
+        console.log(data);
+      }
+    });
+  }
+
+  _readName () {
+    return $('#name').val()
+  }
 }
