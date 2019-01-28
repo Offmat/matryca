@@ -39,25 +39,26 @@ class UploadImage {
 
   _generateArrOfArrs (pixels) {
     let arrOfArrs = [];
-    let array = [];
-    let smallArray = [];
-    let counter = 0;
+    let rowArray = [];
+    let cellColorArray = [];
+    let cellsPerRowCounter = 0;
     $(pixels).each( function(index, number) {
-      if (counter < 21) {
+      if (cellsPerRowCounter < 21) {
         if ((index + 1) % 4 != 0) {
-          smallArray.push(number);
+          cellColorArray.push(number);
         } else {
-          array.push(smallArray)
-          smallArray = [];
-          counter++;
+          rowArray.push(cellColorArray)
+          cellColorArray = [];
+          cellsPerRowCounter++;
         }
       } else {
-        arrOfArrs.push(array);
-        array = [];
-        counter = 0;
+        arrOfArrs.push(rowArray);
+        cellColorArray.push(number);
+        rowArray = [];
+        cellsPerRowCounter = 0;
       }
     })
-    arrOfArrs.push(array)
+    arrOfArrs.push(rowArray)
     return arrOfArrs;
   }
 
