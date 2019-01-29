@@ -1,7 +1,25 @@
-<% @saved_pictures.each do |frame| %>
-  <a href="/edit/<%= frame[:frame_id] %>"><%= frame[:name] %></a>
-  <br>
-<% end %>
----------------------
-<br>
-<a href='/new'>New</a>
+<html>
+  <head>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="/draw_canvases.js"></script>
+  </head>
+  <body>
+    <% @saved_pictures.each do |picture| %>
+      <a href="/edit/<%= picture[:frame_id] %>">
+        <div class='frame-container' id='frame-<%=picture[:frame_id] %>'>
+          <%= picture[:name] %>
+          <span class='image' data-target='<%= picture[:frame] %>'></span>
+        </div>
+
+      </a>
+      <br>
+    <% end %>
+    ---------------------
+    <br>
+    <a href='/new'>New</a>
+  </body>
+</html>
+
+<script>
+  new DrawCanvases().run();
+</script>
