@@ -14,10 +14,10 @@ class FrameFetcher
   private
 
   def frame
-    ImageToFrameConverter.new(path).call
+    YAML.safe_load(File.open(path))
   end
 
   def path
-    @path ||= Dir["data/#{id}_*.jpg"].first
+    @path ||= Dir["data/#{id}_*.json"].first
   end
 end
