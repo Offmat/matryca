@@ -5,12 +5,12 @@ class MyApp < Sinatra::Base
   end
 
   get '/new' do
-    erb :'new.html'
+    erb :'form.html'
   end
 
-  get '/new/:frame_id' do
+  get '/edit/:frame_id' do
     @frame = FrameFetcher.new(params[:frame_id]).call
-    erb :'new.html'
+    erb :'form.html'
   end
 
   post '/new' do
