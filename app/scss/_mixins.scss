@@ -1,0 +1,61 @@
+@mixin heading-font-light {
+  font-family: $heading-font;
+  font-weight: 700;
+}
+
+@mixin heading-font-bold {
+  font-family: $heading-font;
+  font-weight: 900;
+}
+
+@mixin content-font-light {
+  font-family: $content-font;
+  font-weight: 300;
+}
+
+@mixin content-font-regular {
+  font-family: $content-font;
+  font-weight: 400;
+}
+
+@mixin font-size-small {
+  font-size: 14px;
+  line-height: 20px;
+}
+
+@mixin font-size-regular {
+  font-size: 16px;
+  line-height: 24px;
+}
+
+@mixin font-size-medium {
+  font-size: 20px;
+  line-height: 30px;
+}
+
+@mixin font-size-large {
+  font-size: 32px;
+  line-height: 48px;
+}
+
+@mixin reset-floats {
+  clear: both;
+  float: none;
+}
+
+@mixin contain-floats {
+  &::before {
+    content: '';
+    display: table;
+  }
+
+  &::after {
+    content: '';
+    display: table;
+    clear: both;
+  }
+}
+
+@mixin soft-shadow {
+  box-shadow: 0 5px 25px 0 rgba($color-black, 0.08);
+}

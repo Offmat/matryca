@@ -1,0 +1,98 @@
+@import 'fonts';
+@import 'variables';
+@import 'mediaqueries';
+@import 'mixins';
+
+body, html {
+  padding: 0;
+  margin: 0;
+  font-family: $content-font;
+  scroll-behavior: smooth;
+  * {
+    box-sizing: border-box;
+    position: relative;
+  }
+}
+
+table {
+  border-collapse: collapse;
+}
+
+.cell {
+  border: 2px solid white;
+  background: rgb(0, 0, 0);
+  width: 40px;
+  height: 40px;
+  margin: 0;
+  padding: 0;
+  cursor: crosshair;
+}
+
+
+
+.container {
+  width: 100%;
+  display: block;
+  margin: 0 auto;
+}
+
+@include media-query-sm-up {
+  .container {
+    width: calc(100%-50px);
+  }
+}
+
+@include media-query-md-up {
+  .container {
+    width: 960px;
+  }
+}
+
+@include media-query-lg-up {
+  .container {
+    width: 1200px;
+  }
+}
+
+@include media-query-xl-up {
+  .container {
+    width: 1440px;
+  }
+}
+
+.contain-floats {
+  @include contain-floats;
+}
+
+.flex {
+  display: flex;
+}
+
+.flex-center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.text-center {
+  text-align: center;
+}
+
+.text-left {
+  text-align: left;
+}
+
+h2 {
+  color: $color-purple;
+}
+
+a {
+  text-decoration: none;
+}
+
+.card {
+  border-radius: 8px;
+  background-color: $color-white;
+  @include soft-shadow;
+  padding: 25px;
+}

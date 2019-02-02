@@ -1,0 +1,34 @@
+{
+  "name": "matryca-codest",
+  "version": "0.0.1",
+  "description": "",
+  "main": "my_app.rb",
+  "dependencies": {
+    "parallax": "0.0.0"
+  },
+  "devDependencies": {
+    "gulp": "^4.0.0",
+    "gulp-autoprefixer": "^6.0.0",
+    "gulp-concat": "^2.6.1",
+    "gulp-sass": "^3.1.0",
+    "gulp-sass-lint": "^1.4.0",
+    "gulp-sourcemaps": "^2.6.4",
+    "gulp-uglify": "^3.0.0",
+    "gulp-util": "^3.0.8",
+    "merge-stream": "^1.0.1",
+    "uglify-js": "^3.4.9"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:Offmat/matryca.git"
+  },
+  "author": "MNS Lab",
+  "license": "UNLICENSED",
+  "bugs": {
+    "url": "https://github.com/Offmat/matryca/issues"
+  },
+  "homepage": "https://github.com/Offmat/matryca/#README"
+}
