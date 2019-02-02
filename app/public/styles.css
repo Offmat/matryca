@@ -1,0 +1,100 @@
+@import url("https://fonts.googleapis.com/css?family=Roboto:300,400,700,900&subset=latin-ext");
+body, html {
+  padding: 0;
+  margin: 0;
+  font-family: "Roboto", sans-serif;
+  scroll-behavior: smooth;
+}
+
+body *, html * {
+  box-sizing: border-box;
+  position: relative;
+}
+
+table {
+  border-collapse: collapse;
+}
+
+.cell {
+  border: 2px solid white;
+  background: black;
+  width: 40px;
+  height: 40px;
+  margin: 0;
+  padding: 0;
+  cursor: crosshair;
+}
+
+.container {
+  width: 100%;
+  display: block;
+  margin: 0 auto;
+}
+
+@media (min-width: 768px) {
+  .container {
+    width: calc(100%-50px);
+  }
+}
+
+@media (min-width: 996px) {
+  .container {
+    width: 960px;
+  }
+}
+
+@media (min-width: 1280px) {
+  .container {
+    width: 1200px;
+  }
+}
+
+@media (min-width: 1600px) {
+  .container {
+    width: 1440px;
+  }
+}
+
+.contain-floats::before {
+  content: '';
+  display: table;
+}
+
+.contain-floats::after {
+  content: '';
+  display: table;
+  clear: both;
+}
+
+.flex {
+  display: flex;
+}
+
+.flex-center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.text-center {
+  text-align: center;
+}
+
+.text-left {
+  text-align: left;
+}
+
+h2 {
+  color: #802961;
+}
+
+a {
+  text-decoration: none;
+}
+
+.card {
+  border-radius: 8px;
+  background-color: #ffffff;
+  box-shadow: 0 5px 25px 0 rgba(0, 0, 0, 0.08);
+  padding: 25px;
+}
