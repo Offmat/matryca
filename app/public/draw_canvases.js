@@ -22,7 +22,7 @@ class DrawCanvases {
     $(array).each( function(i, row) {
       for (var j = 0; j < row.length; j++) {
         ctx.fillStyle = 'rgb(' + row[j].join(', ') + ')';
-        ctx.fillRect(j * 10, i * 10, 10, 10);
+        ctx.fillRect(j * 15, i * 15, 15, 15);
       }
     })
   }
@@ -30,8 +30,8 @@ class DrawCanvases {
   _canvas (containerId) {
     var canvas = document.createElement('canvas');
     canvas.id = containerId;
-    canvas.width = 210;
-    canvas.height = 150;
+    canvas.width = 315;
+    canvas.height = 225;
     canvas.style.border = "1px solid";
     return canvas;
   }

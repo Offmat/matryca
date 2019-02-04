@@ -33,6 +33,6 @@ class SavedFramesFetcher
   end
 
   def picture_name_from(frame)
-    frame.split('_').drop(1).join('_')
+    frame.split('_').drop(1).join('_').split('.').first
   end
 end
