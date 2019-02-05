@@ -6,17 +6,7 @@
     <link rel="stylesheet" href='/index.css'>
   </head>
   <body>
-    <nav class="navbar navbar-default">
-      <div class="container-fluid">
-        <div class="navbar-header">
-          <a class="navbar-brand" href="/">MatrixService</a>
-        </div>
-        <ul class="nav navbar-nav">
-          <li><a href="/">Home</a></li>
-          <li>  <a href='/new'>New</a></li>
-        </ul>
-      </div>
-    </nav>
+    <%= erb :'header.html' %>
     <div class='container-fluid'>
       <% @saved_pictures.each_slice(3) do |pictures| %>
         <div class="row frame-row">

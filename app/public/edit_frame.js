@@ -4,7 +4,7 @@ class EditFrame {
     this.frame = frame;
   }
 
-  call (){
+  run (){
     this.draw();
   }
 

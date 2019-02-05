@@ -5,7 +5,7 @@ class UploadImage {
     this.input = '[name=image]';
   }
 
-  call (){
+  run (){
     this._addInputListener();
   }
 
@@ -15,7 +15,7 @@ class UploadImage {
     }.bind(this));
   }
 
-  _readFile(file) {
+  _readFile (file) {
     let reader = new FileReader();
     reader.addEventListener("load", function(e) {
       this._getPixels(e.target.result);
@@ -23,7 +23,7 @@ class UploadImage {
     reader.readAsDataURL(file);
   }
 
-  _getPixels(dataURL) {
+  _getPixels (dataURL) {
     let image = new Image();
     image.src = dataURL;
     image.addEventListener('load', e => {
@@ -63,6 +63,6 @@ class UploadImage {
   }
 
   _drawFrame (frame) {
-    new EditFrame(frame).call();
+    new EditFrame(frame).run();
   }
 }

@@ -9,17 +9,7 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
   </head>
   <body>
-    <nav class="navbar navbar-default">
-      <div class="container-fluid">
-        <div class="navbar-header">
-          <a class="navbar-brand" href="/">MatrixService</a>
-        </div>
-        <ul class="nav navbar-nav">
-          <li><a href="/">Home</a></li>
-          <li>  <a href='/new'>New</a></li>
-        </ul>
-      </div>
-    </nav>
+    <%= erb :'header.html' %>
     <div class='table container'>
       <table class='matrix-table' style='display: -webkit-inline-box'>
         <% 15.times do |i| %>
@@ -30,6 +20,7 @@
           </tr>
         <% end %>
       </table>
+      <span id='pipette'>Pipette</span>
       <span id="color-picker-container"></span>
     </div><br>
     <div class='container-fluid'>
@@ -49,8 +40,8 @@
 </html>
 <script>
   new FrameForm().run();
-  new UploadImage().call();
+  new UploadImage().run();
   <% if @frame %>
-    new EditFrame(<%= @frame %>).call();
+    new EditFrame(<%= @frame %>).run();
   <% end %>
 </script>

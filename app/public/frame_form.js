@@ -2,6 +2,12 @@
 class FrameForm {
   constructor () {
     this.colorsArray = [255, 0, 0];
+    this.colorPicker = '#color-picker-container';
+    this.saveDataButton = '#save-data';
+    this.showDataButton = '#show-data';
+    this.matrix = '.matrix-table';
+    this.cells = '.cell';
+    this.pipette = '#pipette';
   }
 
   run () {
@@ -10,10 +16,11 @@ class FrameForm {
     this._initializeSaveDataEvent();
     this._initializeShowDataEvent();
     this._initializeUpdateCellEvent();
+    this._initializePipette();
   }
 
   _initializeColorPicker () {
-    this.demoColorPicker = new iro.ColorPicker("#color-picker-container", {
+    this.frameColorPicker = new iro.ColorPicker("#color-picker-container", {
       width: 320,
       height: 320,
       color: "#f00",
@@ -22,30 +29,56 @@ class FrameForm {
   }
 
   _initializeGetColorEvent () {
-    $('#color-picker-container').on('click', this._getColor.bind(this));
+    $(this.colorPicker).on('click', this._getColor.bind(this));
   }
 
   _initializeSaveDataEvent () {
-    $('#save-data').on('click', this._saveData.bind(this));
+    $(this.saveDataButton).on('click', this._saveData.bind(this));
   }
 
   _initializeShowDataEvent () {
-    $('#show-data').on('click', this._showData.bind(this));
+    $(this.showDataButton).on('click', this._showData.bind(this));
   }
 
   _initializeUpdateCellEvent () {
-    $('.cell').on('click', e => {
+    this._setCursor('crosshair');
+    $(this.cells).on('click', e => {
       this._updateCell(e);
     });
   }
 
+  _initializePipette () {
+    $(this.pipette).on('click', e => {
+      this._initializeCollectColorEvent();
+    })
+  }
+
+  _initializeCollectColorEvent () {
+    this._setCursor('grab'); // cant use svg - already in public :( (css sucks)
+    $(this.cells).unbind();
+    $(this.cells).on('click', e => {
+      this._collectColor(e);
+    });
+  }
+
   _getColor () {
-    this.colorsArray = Object.values(this.demoColorPicker.color.rgb)
+    this.colorsArray = Object.values(this.frameColorPicker.color.rgb)
+  }
+
+  _setCursor (value) {
+    $(this.matrix).css('cursor', value);
   }
 
   _updateCell (element) {
     this._applyData(element);
     this._applyColor(element);
+  }
+
+  _collectColor (element) {
+    this.colorsArray = $(element.target).attr('data-target').split(',').map(e => Number(e));
+    this._setColorPicker();
+    $(this.cells).unbind();
+    this._initializeUpdateCellEvent();
   }
 
   _saveData () {
@@ -65,6 +98,11 @@ class FrameForm {
 
   _applyColor (element) {
     $(element.target).css("background-color", this._makeColor(this.colorsArray));
+  }
+
+  _setColorPicker () {
+    var color = this.colorsArray;
+    this.frameColorPicker.color.rgb = {r: color[0], g: color[1], b: color[2]};
   }
 
   _makeColor (array) {
