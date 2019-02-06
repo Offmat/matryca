@@ -15,7 +15,6 @@ class MyApp < Sinatra::Base
 
   post '/new' do
     MatrixSaveService.new(params[:data], params[:name]).call
-    redirect '/'
   end
 
   post '/show' do

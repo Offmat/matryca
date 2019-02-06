@@ -54,7 +54,7 @@ class FrameForm {
   }
 
   _initializeCollectColorEvent () {
-    this._setCursor('grab'); // cant use svg - already in public :( (css sucks)
+    this._setCursor('url(pipette.png), auto');
     $(this.cells).unbind();
     $(this.cells).on('click', e => {
       this._collectColor(e);
